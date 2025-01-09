@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Árbol de Decisiones - Tipo de Tela</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f7f7f7;
+    }
+    #decision-tree {
+      max-width: 600px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .question {
+      margin: 20px 0;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .options {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .options li {
+      margin-bottom: 10px;
+    }
+    .options button {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .options button:hover {
+      background-color: #0056b3;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="decision-tree">
+    <div id="step-1">
+      <p class="question">¿Qué tipo de tela necesitas?</p>
+      <ul class="options">
+        <li><button onclick="goToStep('step-2a')">Que estire</button></li>
+        <li><button onclick="goToStep('step-2b')">Que no estire</button></li>
+        <li><button onclick="goToStep('step-3')">Entretela</button></li>
+      </ul>
+    </div>
+
+    <div id="step-2a" class="hidden">
+      <p class="question">¿Es para un bikini o ropa de deporte?</p>
+      <ul class="options">
+        <li><button onclick="showResult('Jersey, Rib')">No</button></li>
+        <li><button onclick="showResult('Forro polar (sudaderas o pantalones deportivos)')">Sí</button></li>
+      </ul>
+    </div>
+
+    <div id="step-2b" class="hidden">
+      <p class="question">Selecciona la prenda:</p>
+      <ul class="options">
+        <li><button onclick="goToStep('step-2b1')">Camiseta/vestido/falda</button></li>
+        <li><button onclick="goToStep('step-2b2')">Abrigo o chaqueta</button></li>
+        <li><button onclick="goToStep('step-2b3')">Pantalones</button></li>
+        <li><button onclick="goToStep('step-2b4')">Otros usos</button></li>
+      </ul>
+    </div>
+
+    <div id="step-2b1" class="hidden">
+      <p class="question">Selecciona el tipo:</p>
+      <ul class="options">
+        <li><button onclick="showResult('Pesada: Denim, damasco, tweed chanel, tweed espiga')">Pesada</button></li>
+        <li><button onclick="showResult('Media: Franela, lame')">Media</button></li>
+        <li><button onclick="goToStep('step-2b1-light')">Ligera</button></li>
+      </ul>
+    </div>
+
+    <div id="step-2b1-light" class="hidden">
+      <p class="question">¿Quieres que sea vaporosa y algo transparente?</p>
+      <ul class="options">
+        <li><button onclick="showResult('Encaje, tul, muselina, gasa, organza')">Sí</button></li>
+        <li><button onclick="showResult('Raso, vichy, micropana, terciopelo, plumeti, crespón')">No</button></li>
+      </ul>
+    </div>
+
+    <div id="step-2b2" class="hidden">
+      <p class="question">Selecciona el tipo:</p>
+      <ul class="options">
+        <li><button onclick="showResult('Ligero: Denim, raya diplomática (trajes), príncipe de gales, micropana, terciopelo')">Ligero</button></li>
+        <li><button onclick="showResult('Regular: Forro polar, pana, franela')">Regular</button></li>
+        <li><button onclick="showResult('Estructurado: Damasco, loneta, gabardina, tweed chanel, tweed espiga')">Estructurado</button></li>
+      </ul>
+    </div>
+
+    <div id="step-2b3" class="hidden">
+      <p class="question">Selecciona el tipo:</p>
+      <ul class="options">
+        <li><button onclick="showResult('Algo entremedias: Raya diplomática, príncipe de gales, pana, franela, piqué clásico, pata de gallo')">Algo entremedias</button></li>
+        <li><button onclick="showResult('Estructurado: Denim, damasco, loneta')">Estructurado</button></li>
+      </ul>
+    </div>
+
+    <div id="step-2b4" class="hidden">
+      <p class="question">Selecciona el uso:</p>
+      <ul class="options">
+        <li><button onclick="showResult('Arpillera (decoración, almacenamiento, jardinería...)')">Arpillera</button></li>
+        <li><button onclick="showResult('Forro polar (mantas o accesorios como gorros, guantes y bufandas)')">Forro polar</button></li>
+        <li><button onclick="showResult('Vichy (paños, manteles y servilletas)')">Vichy</button></li>
+        <li><button onclick="showResult('Damasco/cortinas, cojines, tapicería, bolsos o cinturones')">Damasco/cortinas</button></li>
+        <li><button onclick="showResult('Loneta (cortinas, cojines y tapicería)')">Loneta</button></li>
+        <li><button onclick="showResult('Encaje (decoración)')">Encaje</button></li>
+        <li><button onclick="showResult('Fieltro (sombreros, decoración y artesanías)')">Fieltro</button></li>
+      </ul>
+    </div>
+
+    <div id="step-3" class="hidden">
+      <p class="question">Selecciona el tipo de entretela:</p>
+      <ul class="options">
+        <li><button onclick="showResult('Adhesiva')">Adhesiva</button></li>
+        <li><button onclick="showResult('No adhesiva')">No adhesiva</button></li>
+        <li><button onclick="showResult('Hidrosoluble')">Hidrosoluble</button></li>
+      </ul>
+    </div>
+
+    <div id="result" class="hidden">
+      <p class="question">Resultado:</p>
+      <p id="result-text"></p>
+      <button onclick="restart()">Reiniciar</button>
+    </div>
+  </div>
+
+  <script>
+    function goToStep(stepId) {
+      document.querySelectorAll('#decision-tree > div').forEach(div => div.classList.add('hidden'));
+      document.getElementById(stepId).classList.remove('hidden');
+    }
+
+    function showResult(resultText) {
+      document.querySelectorAll('#decision-tree > div').forEach(div => div.classList.add('hidden'));
+      document.getElementById('result').classList.remove('hidden');
+      document.getElementById('result-text').textContent = resultText;
+    }
+
+    function restart() {
+      document.querySelectorAll('#decision-tree > div').forEach(div => div.classList.add('hidden'));
+      document.getElementById('step-1').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
